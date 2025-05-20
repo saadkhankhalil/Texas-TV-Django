@@ -1,0 +1,45 @@
+{% extends 'admin_base.html' %}
+{% block main %}
+
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">All About Features</h5>
+        
+        <div class="container-fluid">
+            <div class="table-responsive">  <!-- Makes the table scrollable on small screens -->
+                <table class="table table-bordered table-sm text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>S. No.</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Icon</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in about_features %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.title }}</td>
+                            <td>{{ i.description }}</td>
+                            <td>
+                                <img src="{{ i.icon.url }}" width="40" height="40" alt="Icon">
+                            </td>
+                            <td>
+                                <a href="{% url 'update_about' i.id %}" class="text-success">Edit</a> |
+                                <a href="{% url 'delete_about' i.id %}" class="text-danger"
+                                    onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
